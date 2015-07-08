@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Bootstrap-->
+        <link href='css/bootstrap.min.css' rel='stylesheet'/>
+        <!--Bootsrap SELECT-->
+        <link href="css/bootstrap-select.min.css" rel='stylesheet'/>
+        <!--Custom CSS-->
+        <link href='css/main.css' rel='stylesheet'/>
+        <!--Angular-->
+        <script src='js/angular.js'></script>
+    </head>
+    <body>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-md-2'>
+                <div class='web-title'>
+                    <h2>Artist 2.0</h2>
+                </div>
+                <ul class='nav'>
+                    <li><a href='#' >System administration</a></li>
+                    <li><a href='#' >Company administration</a></li>
+                    <li><a href="#"  data-toggle='collapse' data-target='#sub1'>Recruitment</a></li>
+                    <ul class='nav collapse' id='sub1'>
+                        <li><a href='#'>Recruitment proposals</a></li>
+                        <li><a href='#'>Recruitments</a></li>
+                        <li><a href='#'>Search</a></li>
+                    </ul>
+                    <li><a href='#'>Reports</a></li>
+            </div>
+            <div class='col-md-8 search-div'>
+                <h2>Search</h2>
+                <a href='#'>Recruitments</a> > <span> Search</span>
+                
+                <h4>Search criteria</h4>
+                <hr>
+                <div class='row'>
+                    <div class='col-md-3'>
+                       <ul class='nav search-criteria'>
+                           <li><a href='#'>Generic attributes</a></li>
+                           <li><a href='#'>Profili fields</a></li>
+                           <li><a href='#'>Predefined questions</a></li>
+                        </ul>
+                    </div>
+                    <div class='col-md-4'>
+                        <h5>Select criteria</h5>
+                        <form class="form-inline">
+                        
+                            <div class="form-group">
+                              <select id="lunch" class="selectpicker" data-live-search="true">
+                                <option>Hot Dog, Fries and a Soda</option>
+                                <option>Burger, Shake and a Smile</option>
+                                <option>Sugar, Spice and all things nice</option>
+                                <option>Baby Back Ribs</option>
+                                <option>A really really long option made to illustrate an issue with the live search in an inline form</option>
+                              </select>
+                            </div>
+                          </form>
+                    </div>
+                    <div class='col-md-5'>
+                        siki
+                    </div>
+                </div>
+                
+            </div>
+            <div class='col-md-2 account-panel'>
+               <div class='search'>
+                    <div class='row'>
+                        <a href='#'>Johua Salonen</a>  <a href='#'>| Logout</a>
+                    </div>
+                    <div class='row'>
+                      <div class="input-group">
+                        <input type="text" class="form-control"/>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </span>
+                    </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap.js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Bootstrap SELECT js -->
+    <script src="js/bootstrap-select.min.js"></script>
+    </body>
+</html>

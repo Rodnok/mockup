@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.search-div{
+    background-color: bisque;
+    margin-top: 10px;
+}
+.account-panel{
+    padding-left: 30px;
+    padding-top: 10px;
+}
+hr{
+    border-color: black;
+}
+.search-criteria{
+    padding-top: 50px;
+}
+
+.nav li{
+    font-size: 13px;
+}
