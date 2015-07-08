@@ -21,3 +21,6 @@ hr{
 .nav li{
     font-size: 13px;
 }
+.removeCr{
+    float: right;
+}

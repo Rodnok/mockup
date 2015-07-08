@@ -10,7 +10,7 @@
         <!--Angular-->
         <script src='js/angular.js'></script>
     </head>
-    <body>
+    <body ng-app='testApp'>
         <div class='container'>
           <div class='row'>
             <div class='col-md-2'>
@@ -34,31 +34,73 @@
                 
                 <h4>Search criteria</h4>
                 <hr>
-                <div class='row'>
+                <div class='row' ng-controller='mainController'>
                     <div class='col-md-3'>
                        <ul class='nav search-criteria'>
-                           <li><a href='#'>Generic attributes</a></li>
-                           <li><a href='#'>Profili fields</a></li>
-                           <li><a href='#'>Predefined questions</a></li>
+                           <li><a href='#' ng-click='showGeneric()'>Generic attributes</a></li>
+                           <li><a href='#' ng-click='showProfili()'>Profili fields</a></li>
+                           <li><a href='#' ng-click='showPredefined()'>Predefined questions</a></li>
                         </ul>
                     </div>
                     <div class='col-md-4'>
-                        <h5>Select criteria</h5>
-                        <form class="form-inline">
-                        
-                            <div class="form-group">
-                              <select id="lunch" class="selectpicker" data-live-search="true">
-                                <option>Hot Dog, Fries and a Soda</option>
-                                <option>Burger, Shake and a Smile</option>
-                                <option>Sugar, Spice and all things nice</option>
-                                <option>Baby Back Ribs</option>
-                                <option>A really really long option made to illustrate an issue with the live search in an inline form</option>
-                              </select>
-                            </div>
-                          </form>
+                        <div class='profili hidden'>
+                            <h5>Select criteria</h5>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                  <select  class="selectpicker pro" data-live-search="true">
+                                      <option ng-repeat='option in profiliOptions'>{{option}}</option>
+                                  </select>
+                                </div>
+                              </form>
+                            <h6>Value</h6>
+                            <input type='text' class='form-control pro'/>
+                            <button class='btn btn-default pull-right' ng-click='addProfili()'>Add</button>
+                        </div>
+                        <div class='generic'>
+                            <H5>Generic attributes</H5>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                  <select  class="selectpicker gen" data-live-search="true">
+                                      <option ng-repeat='option in genericOptions'>{{option}}</option>
+                                  </select>
+                                </div>
+                              </form>
+                            <h6>Value</h6>
+                            <input type='text' class='form-control gen'/>
+                            <button class='btn btn-default pull-right' ng-click='addGeneric()'>Add</button>
+                        </div>
+                        <div class='predefined hidden'>
+                            <h5>Select question</h5>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                  <select  class="selectpicker pre" data-live-search="true">
+                                      <option ng-repeat='option in predefinedOptions track by $index'>{{option}}</option>
+                                  </select>
+                                </div>
+                              </form>
+                            <h6>Value</h6>
+                            <input type='text' class='form-control pre'/>
+                            <button class='btn btn-default pull-right' ng-click='addPredefined()'>Add</button>
+                        </div>
                     </div>
                     <div class='col-md-5'>
-                        siki
+                        <h5>Selected criteria:</h5>
+                        <div class='selected-criteria'>
+                            <div class='nav'>
+                                <p><b>Generic attributes</b></p>
+                                <div ng-repeat="(key,gen) in selectedGeneric">
+                                    {{key}}: {{gen}}<span class="label-important label removeCr"><a href="#" ng-click='removeCrGen(key)'>X</a></span>
+                                </div>
+                                <p><b>Profili fields</b></p>
+                                <div ng-repeat="(key,gen) in selectedProfili">             
+                                    {{key}}: {{gen}}<span class="label-important label removeCr"><a href="#" ng-click='removeCrPro(key)'>X</a></span>
+                                </div> 
+                                <p><b>Predefined questions</b></p>
+                                <div ng-repeat="(key,gen) in selectedPredefined"> 
+                                    {{key}}: {{gen}}<span class="label-important label removeCr"><a href="#" ng-click='removeCrPre(key)'>X</a></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -66,7 +108,7 @@
             <div class='col-md-2 account-panel'>
                <div class='search'>
                     <div class='row'>
-                        <a href='#'>Johua Salonen</a>  <a href='#'>| Logout</a>
+                        <a href='#'>Johua Salonen</a>  <a href='#' class='pull-right'>| Logout</a>
                     </div>
                     <div class='row'>
                       <div class="input-group">
@@ -86,5 +128,9 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Bootstrap SELECT js -->
     <script src="js/bootstrap-select.min.js"></script>
+    <!-- Modules -->
+    <script src='js/app.js'></script>
+    <!-- Controllers -->
+    <script src='js/controllers/mainController.js'></script>
     </body>
 </html>
