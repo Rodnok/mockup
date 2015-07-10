@@ -1,10 +1,16 @@
 body{
     margin: 0;
     padding: 0;
+    background-color: #111111;
+    color: white;
 }
 
+
+.web-title{
+    color:#e18728;
+}
 .search-div{
-    background-color: bisque;
+    background-color: #333333;
     margin-top: 10px;
 }
 .account-panel{
@@ -12,10 +18,11 @@ body{
     padding-top: 10px;
 }
 hr{
-    border-color: black;
+    border-color: #FFC23D;
 }
 .search-criteria{
-    padding-top: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .nav li{
@@ -24,3 +31,121 @@ hr{
 .removeCr{
     float: right;
 }
+.removeCr>a{
+    color:  #be4c39;
+}
+.nav{
+    background-color: #444444;
+}
+.navibar li{
+    background-color: #444444;
+    border-bottom: 2px solid;
+    border-color: #FFC23D;
+}
+.navibar li:last-child{
+    border-bottom: none;
+}
+a{
+    color: #4472b9;
+}
+li>a{
+    color: white;
+}
+.navibar a:hover{
+    color: black;
+}
+.btn{
+    margin: 10px;
+}
+.container{
+    background-color: #222222;
+}
+
+.nav-tabs:after{
+    background-color: orange;
+}
+.dropdown-menu li a {
+	padding: 5px 15px;
+	font-weight: 100;
+}
+.multi-column-dropdown {
+	list-style: none;
+}
+#sub1>li>a{
+    font-size: 12px;
+    margin-left: 8px;
+}
+#sub1>li:last-child{
+    border-bottom: 2px solid;
+    border-color: #FFC23D;
+}
+
+.search-result{
+    overflow-x: scroll;
+    max-width: 100%;
+}
+th{
+    text-align:left;
+    font-size: 13px;
+    min-width: 140px;    
+}
+.active.row{
+    position: relative;
+}
+.check{
+    width: 20px;
+}
+.cog{
+    padding: 30px;
+}
+
+.pagi{
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+
+}
+.pagination>li>a{
+        background-color:#e18728;
+        color:white;
+        border: none;
+}
+.selected-criteria>.nav{
+    padding:10px;
+}
+.selected-criteria>.nav>div{
+    padding-bottom:10px;
+}
+.selected_crit{
+    color:#4472b9;
+    padding-bottom: 20px;
+}
+.form-group>.selectpicker{
+    width: 100%;
+}
+/*Bootstrap overrides*/
+.dropdown-menu{
+        background-color:#444444;
+}
+.table-hover>tbody>tr:hover{
+    background-color: #e18728;
+}
+li a:hover{
+    background-color: aqua;
+}
+.btn-default{
+    background-color: #e18728;
+    border-radius: 0px;
+    border: none;
+    color: white;
+}
+select>option{
+    color: white;
+}
+.dobre{
+    color: #e18728 !important;
+}
+.dobre:hover{
+    color: black !important;
+}
+

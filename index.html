@@ -9,18 +9,20 @@
         <link href='css/main.css' rel='stylesheet'/>
         <!--Angular-->
         <script src='js/angular.js'></script>
+
     </head>
     <body ng-app='testApp'>
-        <div class='container'>
+        <div class='container' ng-controller='mainController'>
+            <!-- Navbar-->
           <div class='row'>
-            <div class='col-md-2'>
+            <div class='col-sm-2'>
                 <div class='web-title'>
                     <h2>Artist 2.0</h2>
                 </div>
-                <ul class='nav'>
+                <ul class='nav navibar'>
                     <li><a href='#' >System administration</a></li>
                     <li><a href='#' >Company administration</a></li>
-                    <li><a href="#"  data-toggle='collapse' data-target='#sub1'>Recruitment</a></li>
+                    <li><a href="#"  data-toggle='collapse' data-target='#sub1'> Recruitment<b class="caret"></b></a></li>
                     <ul class='nav collapse' id='sub1'>
                         <li><a href='#'>Recruitment proposals</a></li>
                         <li><a href='#'>Recruitments</a></li>
@@ -28,76 +30,78 @@
                     </ul>
                     <li><a href='#'>Reports</a></li>
             </div>
-            <div class='col-md-8 search-div'>
+            <div class='col-sm-8 search-div'>
                 <h2>Search</h2>
                 <a href='#'>Recruitments</a> > <span> Search</span>
                 
                 <h4>Search criteria</h4>
                 <hr>
-                <div class='row' ng-controller='mainController'>
-                    <div class='col-md-3'>
-                       <ul class='nav search-criteria'>
+                <div class='row'>
+                    <!-- Three options to select criteria-->
+                    <div class='col-sm-3'>
+                       <ul class='nav navibar search-criteria'>
                            <li><a href='#' ng-click='showGeneric()'>Generic attributes</a></li>
                            <li><a href='#' ng-click='showProfili()'>Profili fields</a></li>
                            <li><a href='#' ng-click='showPredefined()'>Predefined questions</a></li>
                         </ul>
                     </div>
-                    <div class='col-md-4'>
-                        <div class='profili hidden'>
+                    <div class='col-sm-4'>
+                        <div class='profili hidden row'>
                             <h5>Select criteria</h5>
                             <form class="form-inline">
                                 <div class="form-group">
                                   <select  class="selectpicker pro" data-live-search="true">
-                                      <option ng-repeat='option in profiliOptions'>{{option}}</option>
+                                      <option class='dobre' ng-repeat='option in profiliOptions'>{{option}}</option>
                                   </select>
                                 </div>
                               </form>
                             <h6>Value</h6>
-                            <input type='text' class='form-control pro'/>
+                            <input type='text' class='form-control pro' ng-keypress='enterProfili($event)'/>
                             <button class='btn btn-default pull-right' ng-click='addProfili()'>Add</button>
                         </div>
-                        <div class='generic'>
+                        <div class='generic row'>
                             <H5>Generic attributes</H5>
                             <form class="form-inline">
                                 <div class="form-group">
                                   <select  class="selectpicker gen" data-live-search="true">
-                                      <option ng-repeat='option in genericOptions'>{{option}}</option>
+                                      <option class='dobre' ng-repeat='option in genericOptions'>{{option}}</option>
                                   </select>
                                 </div>
                               </form>
                             <h6>Value</h6>
-                            <input type='text' class='form-control gen'/>
+                            <input type='text' class='form-control gen' ng-keypress='enterGeneric($event)'/>
                             <button class='btn btn-default pull-right' ng-click='addGeneric()'>Add</button>
                         </div>
-                        <div class='predefined hidden'>
+                        <div class='predefined hidden row'>
                             <h5>Select question</h5>
                             <form class="form-inline">
                                 <div class="form-group">
                                   <select  class="selectpicker pre" data-live-search="true">
-                                      <option ng-repeat='option in predefinedOptions track by $index'>{{option}}</option>
+                                      <option class='dobre' ng-repeat='option in predefinedOptions track by $index'>{{option}}</option>
                                   </select>
                                 </div>
                               </form>
                             <h6>Value</h6>
-                            <input type='text' class='form-control pre'/>
+                            <input type='text' class='form-control pre' ng-keypress='enterPredefined($event)'/>
                             <button class='btn btn-default pull-right' ng-click='addPredefined()'>Add</button>
                         </div>
                     </div>
-                    <div class='col-md-5'>
+                    <!--Display selected criteria, you can remove them by clicking 'x'-->
+                    <div class='col-sm-5'>
                         <h5>Selected criteria:</h5>
                         <div class='selected-criteria'>
                             <div class='nav'>
-                                <p><b>Generic attributes</b></p>
+                                <p ng-if='checkGene()'><b>Generic attributes</b></p>
                                 <div ng-repeat="(key,gen) in selectedGeneric">
-                                    {{key}}: {{gen}}<span class="label-important label removeCr"><a href="#" ng-click='removeCrGen(key)'>X</a></span>
+                                    <span class='selected_crit'>{{key}}: {{gen}}</span><span class="label-important label removeCr"><a href="#" ng-click='removeCrGen(key)'>X</a></span>
                                 </div>
-                                <p><b>Profili fields</b></p>
+                                <p ng-if='checkProfi()'><b>Profili fields</b></p>
                                 <div ng-repeat="(key,gen) in selectedProfili">             
-                                    {{key}}: {{gen}}<span class="label-important label removeCr"><a href="#" ng-click='removeCrPro(key)'>X</a></span>
+                                    <span class='selected_crit'>{{key}}: {{gen}}</span><span class="label-important label removeCr"><a href="#" ng-click='removeCrPro(key)'>X</a></span>
                                 </div> 
-                                <p><b>Predefined questions</b></p>
+                                <p ng-if='checkPrede()'><b>Predefined questions</b></p>
                                 <div ng-repeat="(key,gen) in selectedPredefined"> 
-                                    {{key}}: {{gen}}<span class="label-important label removeCr"><a href="#" ng-click='removeCrPre(key)'>X</a></span>
+                                    <span class='selected_crit'>{{key}}: {{gen}}</span><span class="label-important label removeCr"><a href="#" ng-click='removeCrPre(key)'>X</a></span>
                                 </div>
                             </div>
                         </div>
@@ -105,19 +109,148 @@
                 </div>
                 
             </div>
-            <div class='col-md-2 account-panel'>
+                <!--Logged status, just visual-->
+            <div class='col-sm-2 account-panel hidden-xs'>
                <div class='search'>
                     <div class='row'>
-                        <a href='#'>Johua Salonen</a>  <a href='#' class='pull-right'>| Logout</a>
+                        <a href='#'>Johua Salonen</a>  <a href='#' class='pull-right' style="padding-right:5px">| Logout</a>
                     </div>
                     <div class='row'>
-                      <div class="input-group">
-                        <input type="text" class="form-control"/>
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </span>
-                    </div>
+                          <div class="input-group">
+                            <input type="text" class="form-control"/>
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </span>
+                        </div>
                    </div>
+                </div>
+            </div>
+        </div>
+              
+        <div class='col-md-8 col-md-offset-2'>
+            <div class='row'>
+                <h4>Show results in:</h4>
+            </div>
+            <div class='row'>
+                <div clss='tabs'>
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#filled" aria-controls="home" role="tab" data-toggle="tab">Filled applications</a></li>
+                    <li role="presentation"><a href="#matching" aria-controls="profile" role="tab" data-toggle="tab">Matching applications in Profili</a></li>
+                  </ul>
+                  <!-- Tab panels -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active row" id="filled">
+                            <div>
+                                <!--Dropdown COG-->
+                                <button class='btn btn-default pull-right dropdown-toggle' data-toggle="dropdown">
+                                    <b class="caret"></b><span class='glyphicon glyphicon-cog'></span></button>
+                                         <ul class="dropdown-menu pull-right">
+                                             <div class='cog'>
+                                                            <p>Application status</p>
+                                                            <select class='selectpicker'>
+                                                                <option>Interviewed</option>
+                                                                <option>Pending</option>
+                                                            </select>
+                                                            <p>Application classification</p>
+                                                            <select class='selectpicker'>
+                                                                <option>Potential</option>
+                                                                <option>Not potential</option>
+                                                            </select>
+                                                            <p>Application custom classification 1</p>
+                                                            <select class='selectpicker'>
+                                                                <option>Custom 1</option>
+                                                                <option>Custom 2</option>
+                                                                <option>Custom 3</option>
+                                                            </select>
+                                                            <p>Application custom classification 2</p>
+                                                            <select class='selectpicker'>
+                                                                <option>Custom 1</option>
+                                                                <option>Custom 2</option>
+                                                                <option>Custom 3</option>
+                                                            </select>
+                                                            <p>Application custom classification 3</p>
+                                                            <select class='selectpicker'>
+                                                                <option>Custom 1</option>
+                                                                <option>Custom 2</option>
+                                                                <option>Custom 3</option>
+                                                            </select>
+                                                    <div class='row'>
+                                                            <button class='btn btn-default pull-right'>SAVE</button>
+                                                     </div>
+                                                 </div>
+                                        </ul>
+                            </div>
+                            <div>
+                                <!--Dropdown Filter. If u add filter the search table will expand-->
+                                <button class='btn btn-default pull-right dropdown-toggle' data-toggle='dropdown' ng-click='kli($event)'>
+                                    <b class="caret"></b><span class='glyphicon glyphicon-filter'></span></button>
+                                        <ul class="dropdown-menu multi-column columns-3 pull-right" id='filter'>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <ul class="multi-column-dropdown">
+                                                                <li ng-repeat='generic in genericOptions'><input type="checkbox"  ng-model="gene[generic]"/>{{generic}}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="multi-column-dropdown">
+                                                                <li ng-repeat='profili in profiliOptions'><input type="checkbox" ng-model="profi[profili]"/>{{profili}}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="multi-column-dropdown">
+                                                                <li ng-repeat='predefined in predefinedOptions track by $index'><input type="checkbox" ng-model='prede[predefined]'/>                                                                               {{predefined}}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </ul>
+                                       
+                            </div>	            
+                    </div>
+                      
+                      <div class='row'>
+                          <div class='search-result'>
+                              <table class='table table-hover table-bordered'>
+                                  <thead>
+                                      <tr>
+                                          <td class='check'></td>
+                                          <th ng-repeat='(key, val) in gene track by $index' ng-if='val'>{{key}}</th>
+                                          <th ng-repeat='(key, val) in profi track by $index' ng-if='val'>{{key}}</th>
+                                          <th ng-repeat='(key, val) in prede track by $index' ng-if='val'>{{key}}</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr ng-repeat='person in people' class='tableResult'>
+                                          <td><input type="checkbox"/></td>
+                                         <td ng-repeat='(key,val) in gene' ng-if='val'>{{person[key]}}</td>
+                                          <td ng-repeat='(key,val) in profi' ng-if='val'>{{person[key]}}</td>
+                                          <td ng-repeat='(key,val) in prede' ng-if='val'>{{person[key]}}</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                        </div>
+                      </div>
+                      <!-- Pagination only visual -->
+                      <nav class='pagi'>
+                          <ul class="pagination">
+                            <li>
+                              <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                              <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                  </div>
                 </div>
             </div>
         </div>
@@ -132,5 +265,7 @@
     <script src='js/app.js'></script>
     <!-- Controllers -->
     <script src='js/controllers/mainController.js'></script>
+    <!--Custom JS-->
+    <script src='js/main.js'></script>
     </body>
 </html>
